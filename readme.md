@@ -1,6 +1,6 @@
 # Random Bot 
 
-[![forthebadge](./md/powered-by-clownerie.tk.svg)](https://forthebadge.com)
+[![forthebadge](./md/powered-by-clownerie.tk.svg)](http://clownerie.tk)
 
 ## Installation 
 
