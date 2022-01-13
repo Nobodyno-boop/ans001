@@ -27,7 +27,7 @@ client.on('interactionCreate', async interaction => {
 
 async function global(){
    const g =  await client.guilds.fetch(process.env['DISCORD_GID'])
-   const ch = await g.channels.fetch(process.env['DISCORD_GID'])
+   const ch = await g.channels.fetch(process.env['DISCORD_GC'])
     if(ch instanceof TextChannel){
         ch.send(":bell: C'est l'heure de faire les signatures @here !")
     }
