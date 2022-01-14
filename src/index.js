@@ -35,4 +35,4 @@ async function global(){
 
 
 
-client.login(process.env['DISOCRD_TOKEN']);
+client.login(process.env['DISCORD_TOKEN']);
