@@ -7,30 +7,41 @@ const { Client, Intents, TextChannel } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-  schedule.scheduleJob('0 11-15 * * 0-5', function(fireDate){
-    global()
-    console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
-  });
+console.log(`Logged in as ${client.user.tag}!`);
+schedule.scheduleJob('0 11-15 * * 0-5', function(fireDate){
+global()
+console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
 });
+});
+
+const prefixCmd = '!'
 
 client.on('interactionCreate', async interaction => {
-  if (!interaction.isCommand()) return;
+if (!interaction.isCommand()) return;
 
-//   if (interaction.commandName === 'ping') {
-//     await interaction.reply('Pong!');
+// if (interaction.commandName === 'ping') {
+// await interaction.reply('Pong!');
 
-//   }
+// }
 
 
 });
 
+client.on('messageCreate', message => {
+
+if (message.author.bot) return;
+
+if(message.content === prefixCmd + "asterix"){
+message.channel.send(`Welcom asterix`)
+}
+})
+
 async function global(){
-   const g =  await client.guilds.fetch(process.env['DISCORD_GID'])
-   const ch = await g.channels.fetch(process.env['DISCORD_GC'])
-    if(ch instanceof TextChannel){
-        ch.send(":bell: C'est l'heure de faire les signatures @here !")
-    }
+const g = await client.guilds.fetch(process.env['DISCORD_GID'])
+const ch = await g.channels.fetch(process.env['DISCORD_GC'])
+if(ch instanceof TextChannel){
+ch.send(":bell: C'est l'heure de faire les signatures @here !")
+}
 }
 
 
