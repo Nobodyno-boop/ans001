@@ -31,7 +31,7 @@ async function setupJobs() {
     }
     console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
   });
-  jobs.on("bell", () => {
+  jobs.on("bell", async () => {
     await global()
   })
 
