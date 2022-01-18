@@ -6,7 +6,7 @@ env.config({ path: path.resolve(process.cwd(), ".env") })
 const { Client, Intents, TextChannel } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-client.on('ready', () => {
+client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   setupJobs()
 });
@@ -25,16 +25,19 @@ client.on('interactionCreate', async interaction => {
 
 
 async function setupJobs() { 
-  const jobs = schedule.scheduleJob('0 11,15 * * 0-5', function(fireDate){
-    if(this instanceof schedule.Job){
-      this.emit("bell")
+    if(client.isReady()){
+        const jobs = schedule.scheduleJob('0 11,15 * * 0-5', function(fireDate){
+            if(this instanceof schedule.Job){
+              this.emit("bell")
+            }
+            console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
+          });
+          jobs.on("bell", async () => {
+            await global()
+          })
+    } else {
+        console.error("[BOT] Discord.Client not ready")
     }
-    console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
-  });
-  jobs.on("bell", async () => {
-    await global()
-  })
-
 }
 
 
