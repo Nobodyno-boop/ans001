@@ -1,5 +1,5 @@
 const path = require("path")
-const schedule = require('node-schedule');
+const schedule  = require("node-schedule")
 const env = require('dotenv');
 env.config({ path: path.resolve(process.cwd(), ".env") })
 
@@ -8,10 +8,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  schedule.scheduleJob('0 11-15 * * 0-5', function(fireDate){
-    global()
-    console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
-  });
+  setupJobs()
 });
 
 client.on('interactionCreate', async interaction => {
@@ -24,6 +21,22 @@ client.on('interactionCreate', async interaction => {
 
 
 });
+
+
+
+function setupJobs() { 
+  const jobs = schedule.scheduleJob('0 11,15 * * 0-5', function(fireDate){
+    if(this instanceof schedule.Job){
+      this.emit("bell")
+    }
+    console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
+  });
+  jobs.on("bell", () => {
+    await global()
+  })
+
+}
+
 
 async function global(){
    const g =  await client.guilds.fetch(process.env['DISCORD_GID'])
