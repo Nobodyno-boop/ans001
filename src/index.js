@@ -24,7 +24,7 @@ client.on('interactionCreate', async interaction => {
 
 
 
-function setupJobs() { 
+async function setupJobs() { 
   const jobs = schedule.scheduleJob('0 11,15 * * 0-5', function(fireDate){
     if(this instanceof schedule.Job){
       this.emit("bell")
