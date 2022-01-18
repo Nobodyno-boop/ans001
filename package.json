@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "env NODE_ENV=production node src/index.js",
+    "dev": "env NODE_ENV=developement node src/index.js"
   },
   "dependencies": {
     "@discordjs/rest": "^0.2.0-canary.0",
